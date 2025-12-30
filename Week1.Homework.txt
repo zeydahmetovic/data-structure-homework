@@ -1,0 +1,130 @@
+Week 1 Homework
+
+#include <stdio.h>
+
+#define MAX 100
+
+// Function declarations
+void traverse(int arr[], int n);
+int insert(int arr[], int n, int pos, int value);
+int delete(int arr[], int n, int pos);
+void search(int arr[], int n, int key);
+
+int main() {
+    int arr[MAX] = {10, 20, 30, 40, 50};
+    int n = 5;
+    int choice, pos, value, key;
+
+    while (1) {
+        printf("\n--- Array Operations Menu ---\n");
+        printf("1. Traverse\n");
+        printf("2. Insert\n");
+        printf("3. Delete\n");
+        printf("4. Search\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                traverse(arr, n);
+                break;
+
+            case 2:
+                printf("Enter position (0-based index): ");
+                scanf("%d", &pos);
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                n = insert(arr, n, pos, value);
+                break;
+
+            case 3:
+                printf("Enter position (0-based index) to delete: ");
+                scanf("%d", &pos);
+                n = delete(arr, n, pos);
+                break;
+
+            case 4:
+                printf("Enter element to search: ");
+                scanf("%d", &key);
+                search(arr, n, key);
+                break;
+
+            case 5:
+                return 0;
+
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+}
+
+// Traverse function
+void traverse(int arr[], int n) {
+    int i;
+    printf("Array elements: ");
+    for (i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+// Insert function
+int insert(int arr[], int n, int pos, int value) {
+    int i;
+    if (pos < 0 || pos > n) {
+        printf("Invalid position!\n");
+        return n;
+    }
+
+    for (i = n - 1; i >= pos; i--) {
+        arr[i + 1] = arr[i];
+    }
+
+    arr[pos] = value;
+    n++;
+    printf("Element inserted successfully.\n");
+    return n;
+}
+
+// Delete function
+int delete(int arr[], int n, int pos) {
+    int i;
+    if (pos < 0 || pos >= n) {
+        printf("Invalid position!\n");
+        return n;
+    }
+
+    for (i = pos; i < n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+
+    n--;
+    printf("Element deleted successfully.\n");
+    return n;
+}
+
+// Search function
+void search(int arr[], int n, int key) {
+    int i;
+    for (i = 0; i < n; i++) {
+        if (arr[i] == key) {
+            printf("Element found at position %d\n", i);
+            return;
+        }
+    }
+    printf("Element not found.\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

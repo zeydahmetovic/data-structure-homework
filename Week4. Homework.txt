@@ -1,0 +1,107 @@
+Week4. Homework
+
+
+How to add an element end of double linked list?
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+
+// Insert at front
+void insertFront(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->prev = NULL;
+    newNode->next = head;
+
+    if (head != NULL)
+        head->prev = newNode;
+
+    head = newNode;
+}
+
+// Traverse forward
+void traverse() {
+    struct Node* temp = head;
+    printf("DLL: ");
+    while (temp != NULL) {
+        printf("%d <-> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    insertFront(10);
+    insertFront(20);
+    insertFront(30);
+    traverse();
+    return 0;
+}
+
+How you can delete all the elements of a linked list? (Write it as recursive)
+
+void deleteAll(struct Node* temp) {
+    if (temp == NULL)
+        return;
+
+    deleteAll(temp->next);
+    free(temp);
+}
+
+How you can add an element between elements at double linked list?
+
+void insertAfter(int pos, int value) {
+    struct Node* temp = head;
+    struct Node* newNode;
+    int i;
+
+    for (i = 0; i < pos; i++) {
+        if (temp == NULL)
+            return;
+        temp = temp->next;
+    }
+
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+
+    newNode->next = temp->next;
+    newNode->prev = temp;
+
+    if (temp->next != NULL)
+        temp->next->prev = newNode;
+
+    temp->next = newNode;
+}
+
+Differences between Linked list and Circular Linked List
+
+| Feature             | Linked List     | Circular Linked List        |
+| ------------------- | --------------- | --------------------------- |
+| Last node points to | NULL            | Head node                   |
+| Traversal end       | Stops at NULL   | Stops when head is reached  |
+| Loop possibility    | Less            | Higher                      |
+| Memory              | Same            | Same                        |
+| Applications        | General purpose | CPU scheduling, round robin |
+
+Differences with sorting algorithms
+
+| Sorting Algorithm | Works on Linked List | Reason                            |
+| ----------------- | -------------------- | --------------------------------- |
+| Bubble Sort       | ✅ Yes                | Uses adjacent swaps               |
+| Insertion Sort    | ✅ Best choice        | No shifting, only pointer changes |
+| Selection Sort    | ✅ Yes                | Value swapping                    |
+| Merge Sort        | ✅ Best for LL        | No random access needed           |
+| Quick Sort        | ❌ Not efficient      | Needs random access               |
+| Heap Sort         | ❌ No                 | Array-based                       |
+
+
+
+

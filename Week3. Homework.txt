@@ -1,0 +1,76 @@
+Week3. Homework
+
+Single Linked List
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+
+// Traversal
+void traverse() {
+    struct Node* temp = head;
+    printf("Linked List: ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+// Insert at front
+void insertFront(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+}
+
+// Insert at end
+void insertEnd(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* temp = head;
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+}
+
+// Delete at front
+void deleteFront() {
+    if (head == NULL)
+        return;
+
+    struct Node* temp = head;
+    head = head->next;
+    free(temp);
+}
+
+int main() {
+    insertFront(10);
+    insertFront(20);
+    insertEnd(30);
+    traverse();
+
+    deleteFront();
+    traverse();
+
+    return 0;
+}
+
+Doubled Linked List
+
+

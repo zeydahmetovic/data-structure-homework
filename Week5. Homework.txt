@@ -1,0 +1,55 @@
+Week5. Homework
+
+Example 1: a * b + c
+Step 1: Initialize
+
+Input: a * b + c
+
+Stack: empty
+
+Output: empty
+
+Step 2: Process each symbol
+
+| Symbol | Action                                                         | Stack | Output    |
+| ------ | -------------------------------------------------------------- | ----- | --------- |
+| `a`    | Operand → output                                               | []    | `a`       |
+| `*`    | Operator → push                                                | `*`   | `a`       |
+| `b`    | Operand → output                                               | `*`   | `a b`     |
+| `+`    | Operator → pop `*` (higher precedence) → output, then push `+` | `+`   | `a b *`   |
+| `c`    | Operand → output                                               | `+`   | `a b * c` |
+
+Step 3: Pop remaining stack
+
+Pop + → output
+
+Result Postfix: a b * c +
+
+
+Example 2: (a + b) * c
+Step 1: Initialize
+
+Input: (a + b) * c
+
+Stack: empty
+
+Output: empty
+
+Step 2: Process each symbol
+
+| Symbol | Action                 | Stack | Output    |
+| ------ | ---------------------- | ----- | --------- |
+| `(`    | Push `(`               | `(`   |           |
+| `a`    | Operand → output       | `(`   | `a`       |
+| `+`    | Operator → push        | `( +` | `a`       |
+| `b`    | Operand → output       | `( +` | `a b`     |
+| `)`    | Pop until `(` → output | []    | `a b +`   |
+| `*`    | Operator → push        | `*`   | `a b +`   |
+| `c`    | Operand → output       | `*`   | `a b + c` |
+
+
+Step 3: Pop remaining stack
+
+Pop * → output
+
+Result Postfix: a b + c *
